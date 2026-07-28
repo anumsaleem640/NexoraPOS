@@ -1,0 +1,33 @@
+{
+  "name": "nexorapos-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Unified headless Point-of-Sale and e-commerce ecosystem",
+  "workspaces": [
+    "backend",
+    "admin",
+    "website",
+    "mobile"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev --workspace=backend",
+    "dev:admin": "npm run dev --workspace=admin",
+    "dev:website": "npm run dev --workspace=website",
+    "build:backend": "npm run build --workspace=backend",
+    "build:admin": "npm run build --workspace=admin",
+    "build:website": "npm run build --workspace=website",
+    "type-check": "npm run type-check --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "keywords": [
+    "pos",
+    "ecommerce",
+    "headless",
+    "nextjs",
+    "react",
+    "vite",
+    "react-native"
+  ],
+  "author": "NexoraPOS Engineering Team",
+  "license": "UNLICENSED"
+}
