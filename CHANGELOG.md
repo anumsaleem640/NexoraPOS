@@ -5,6 +5,13 @@ All notable NexoraPOS documentation and architecture changes are recorded here.
 ## [1.0.0] — 2026-07-28
 
 ### Added
+- Implemented `validateEncryptionKey` verifying `process.env.ENCRYPTION_KEY` (minimum 32 bytes) without exposing secrets
+- Implemented AES-256-CBC file envelope encryption/decryption (`crypto.ts`) with random IVs and HMAC-SHA256 authentication metadata
+- Implemented async `Mutex` (`mutex.ts`) for serializing database write operations and preventing concurrent write race conditions
+- Defined strongly-typed Zod schemas (`schema.ts`) and default initializers for `users`, `sessions`, `products`, `categories`, `inventory`, `orders`, `customers`, and `settings`
+- Built `PersistenceEngine` (`db.ts`) with atomic write swaps (`data.enc.tmp` -> `data.enc`), rotating backups (`data.enc.bak.1`), and safe corruption handling
+- Implemented 8 domain repositories (`UserRepository`, `SessionRepository`, `ProductRepository`, `CategoryRepository`, `InventoryRepository`, `OrderRepository`, `CustomerRepository`, `SettingsRepository`)
+- Added Vitest automated test suite (`tests/crypto.test.ts`, `tests/persistence.test.ts`, `tests/repositories.test.ts`) covering 15 test scenarios
 - Initialized monorepo structure with npm workspaces (`backend`, `admin`, `website`, `mobile`)
 - Initialized Next.js App Router backend (`backend/`) with base `/api/v1/health` endpoint
 - Initialized React + Vite Admin SPA (`admin/`) with CSS Modules design system shell
