@@ -15,15 +15,15 @@ Status: `[ ]` Not Started, `[~]` In Progress, `[x]` Complete, `[!]` Blocked.
 - [x] Configure formatting
 
 ## Phase 2 — Persistence
-- [ ] Encryption key validation
-- [ ] AES-256-CBC encryption
-- [ ] Decryption
-- [ ] Serialization
-- [ ] Data validation
-- [ ] Mutex
-- [ ] Atomic writes
-- [ ] Corruption handling
-- [ ] Repository abstraction
+- [x] Encryption key validation
+- [x] AES-256-CBC encryption
+- [x] Decryption
+- [x] Serialization
+- [x] Data validation
+- [x] Mutex
+- [x] Atomic writes
+- [x] Corruption handling
+- [x] Repository abstraction
 
 ## Phase 3 — Authentication
 - [ ] User model
