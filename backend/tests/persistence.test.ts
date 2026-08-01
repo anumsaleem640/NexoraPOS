@@ -34,7 +34,8 @@ describe('PersistenceEngine (File Encryption, Atomic Swaps, Mutex, Corruption)',
 
     const state = engine.getState();
     expect(state.version).toBe(1);
-    expect(state.users).toEqual([]);
+    expect(state.users.length).toBe(1);
+    expect(state.users[0].email).toBe('admin@nexorapos.com');
     expect(state.settings.storeName).toBe('NexoraPOS Store');
   });
 
@@ -45,10 +46,10 @@ describe('PersistenceEngine (File Encryption, Atomic Swaps, Mutex, Corruption)',
     await engine.updateState((draft) => {
       draft.users.push({
         id: 'usr_1',
-        email: 'admin@nexorapos.com',
+        email: 'cashier@nexorapos.com',
         passwordHash: 'hashed_secret',
-        name: 'Admin User',
-        role: 'admin',
+        name: 'Cashier User',
+        role: 'cashier',
         isActive: true,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
@@ -63,8 +64,8 @@ describe('PersistenceEngine (File Encryption, Atomic Swaps, Mutex, Corruption)',
     await engine2.initialize();
 
     const state = engine2.getState();
-    expect(state.users.length).toBe(1);
-    expect(state.users[0].email).toBe('admin@nexorapos.com');
+    expect(state.users.length).toBe(2);
+    expect(state.users.some((u) => u.email === 'cashier@nexorapos.com')).toBe(true);
   });
 
   it('handles 50 concurrent writes without lost updates or race conditions', async () => {

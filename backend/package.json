@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "type-check": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "npx vitest run"
   },
   "dependencies": {
     "next": "^14.2.5",
