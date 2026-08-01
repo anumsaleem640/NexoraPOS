@@ -26,14 +26,14 @@ Status: `[ ]` Not Started, `[~]` In Progress, `[x]` Complete, `[!]` Blocked.
 - [x] Repository abstraction
 
 ## Phase 3 — Authentication
-- [ ] User model
-- [ ] Password hashing
-- [ ] Login API
-- [ ] Logout API
-- [ ] Token validation
-- [ ] Session management
-- [ ] Role system
-- [ ] Permission system
+- [x] User model
+- [x] Password hashing
+- [x] Login API
+- [x] Logout API
+- [x] Token validation
+- [x] Session management
+- [x] Role system
+- [x] Permission system
 
 ## Phase 4 — Products
 - [ ] Product model

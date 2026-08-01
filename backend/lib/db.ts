@@ -4,6 +4,7 @@ import { validateEncryptionKey, encryptData, decryptData } from './crypto';
 import { Mutex } from './mutex';
 import { DatabaseState, createEmptyDatabase, validateDatabaseState } from './schema';
 import { CorruptionError } from './errors';
+import { hashPassword } from './passwords';
 
 export class PersistenceEngine {
   private static instance: PersistenceEngine | null = null;
@@ -27,9 +28,9 @@ export class PersistenceEngine {
   /**
    * Returns singleton instance or creates new one.
    */
-  public static getInstance(): PersistenceEngine {
+  public static getInstance(customFilePath?: string, customRawKey?: string): PersistenceEngine {
     if (!PersistenceEngine.instance) {
-      PersistenceEngine.instance = new PersistenceEngine();
+      PersistenceEngine.instance = new PersistenceEngine(customFilePath, customRawKey);
     }
     return PersistenceEngine.instance;
   }
@@ -62,6 +63,21 @@ export class PersistenceEngine {
       } else {
         // Initial creation of empty database file
         this.state = createEmptyDatabase();
+        // Seed default initial admin user if no users exist
+        if (this.state.users.length === 0) {
+          const now = new Date().toISOString();
+          const adminPasswordHash = await hashPassword('AdminPassword123!');
+          this.state.users.push({
+            id: 'usr_admin_initial',
+            email: 'admin@nexorapos.com',
+            passwordHash: adminPasswordHash,
+            name: 'System Admin',
+            role: 'admin',
+            isActive: true,
+            createdAt: now,
+            updatedAt: now,
+          });
+        }
         await this.writeAtomicState(this.state);
       }
       this.initialized = true;
